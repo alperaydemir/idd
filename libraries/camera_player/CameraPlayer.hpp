@@ -2,9 +2,11 @@
 
 class CameraPlayer {
 public:
-	void openCamera();
-	void capture();
+	~CameraPlayer();
+	void OpenCamera();
+	void Capture(bool continous = true, bool save = true);
 private:
 	mvIMPACT::acquire::DeviceManager manager_;
 	mvIMPACT::acquire::Device* device_;
+	FunctionInterface* fi_;
 };

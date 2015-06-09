@@ -12,6 +12,7 @@ set(CAMERA_PATH "${PROJECT_SOURCE_DIR}/ext/mvIMPACT_acquire-x86_64-2.12.5/")
 set(CAMERA_DRIVER_LIB_PATH "${PROJECT_SOURCE_DIR}/ext/mvIMPACT_acquire-x86_64-2.12.5/lib/x86_64")
 
 # Set camera driver paths and libraries.
+include_directories(${CAMERA_PATH}/apps/Common)
 include_directories(${CAMERA_PATH}/mvDeviceManager/Include)
 include_directories(${CAMERA_PATH}/mvPropHandling/Include)
 include_directories(${CAMERA_PATH}/mvPropGrid/Include)

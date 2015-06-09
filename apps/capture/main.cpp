@@ -5,7 +5,7 @@
 int main(int argc, char **argv)
 {
 	CameraPlayer player;
-	player.openCamera();
-	player.capture();
+	player.OpenCamera();
+	player.Capture();
   return 0;
 }
