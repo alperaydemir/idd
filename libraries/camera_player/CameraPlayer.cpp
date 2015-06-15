@@ -6,7 +6,7 @@
 
 using namespace mvIMPACT::acquire;
 
-const int kMaxCaptureWaitTime = -1;
+const int kMaxCaptureWaitTime = 500;
 static int frame_nr = 0;
 
 void CameraPlayer::OpenCamera() {
@@ -18,9 +18,17 @@ void CameraPlayer::OpenCamera() {
 }
 
 void CameraPlayer::Capture(bool continuos, bool save) {
-  fi_->imageRequestSingle();
+  SystemSettings ss(device_);
+  const int REQUEST_COUNT = ss.requestCount.read();
+  for(int i=0; i<REQUEST_COUNT; i++)
+  {
+    int result = fi_->imageRequestSingle();
+    if( result != DMR_NO_ERROR )
+    {
+      std::cout << "Error while filling the request queue: " << ImpactAcquireException::getErrorCodeAsString( result ) << std::endl;
+    }
+  }
 
-  fi_->acquisitionStart();
   do {
     int request_nr = fi_->imageRequestWaitFor(kMaxCaptureWaitTime);
     if (fi_->isRequestNrValid(request_nr)) {
@@ -36,10 +44,10 @@ void CameraPlayer::Capture(bool continuos, bool save) {
         frame_nr++;
         // this image has been displayed thus the buffer is no longer needed...
       }
+      fi_->imageRequestUnlock(request_nr);
+      fi_->imageRequestSingle();
     }
-    fi_->imageRequestUnlock(request_nr);
-    fi_->imageRequestSingle();
-  } while (continuos);
+  } while (continuos && !stop);
 }
 
 CameraPlayer::~CameraPlayer() { device_->close(); }

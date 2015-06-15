@@ -5,6 +5,8 @@ public:
 	~CameraPlayer();
 	void OpenCamera();
 	void Capture(bool continous = true, bool save = true);
+
+	bool stop = false;
 private:
 	mvIMPACT::acquire::DeviceManager manager_;
 	mvIMPACT::acquire::Device* device_;
