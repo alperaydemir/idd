@@ -8,8 +8,8 @@ set(EXECUTABLE_OUTPUT_PATH "${INSTALL_PATH}/bin")
 set(LIBRARY_OUTPUT_PATH "${INSTALL_PATH}/lib")
 
 set(CMAKE_INSTALL_PREFIX ${INSTALL_PATH})
-set(CAMERA_PATH "${PROJECT_SOURCE_DIR}/ext/mvIMPACT_acquire-x86_64-2.12.5/")
-set(CAMERA_DRIVER_LIB_PATH "${PROJECT_SOURCE_DIR}/ext/mvIMPACT_acquire-x86_64-2.12.5/lib/x86_64")
+set(CAMERA_PATH "${PROJECT_SOURCE_DIR}/ext/mvIMPACT_acquire-x86_64-2.13.1/")
+set(CAMERA_DRIVER_LIB_PATH "${PROJECT_SOURCE_DIR}/ext/mvIMPACT_acquire-x86_64-2.13.1/lib/x86_64")
 
 # Set camera driver paths and libraries.
 include_directories(${CAMERA_PATH}/apps/Common)
